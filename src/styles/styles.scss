@@ -1,0 +1,8 @@
+@import "../../node_modules/sass-autoprefixer/scss/prefixes";
+@import './base/settings';
+@import './base/base';
+@import './components/header.scss';
+@import './components/game-nav-buttons.scss';
+@import './components/game-buttons.scss';
+@import './components/game-notes.scss';
+@import './components/keyboard.scss';

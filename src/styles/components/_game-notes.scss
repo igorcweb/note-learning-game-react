@@ -1,0 +1,23 @@
+.notes {
+	position: absolute;
+	left: 50%;
+	top: 8rem;
+	transform: translateX(-50%);
+	display: block;
+	width: 11rem;
+	height: 13.5rem;
+	border-radius: 5%;
+	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+	@include atSmall {
+    top: 4rem;
+		width: 13rem;
+		height: 16rem;
+		top: 6.5rem;
+	}
+
+  @include atMedium {
+    width: 14rem;
+		height: 16.5rem;
+  }
+}

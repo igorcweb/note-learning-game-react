@@ -1,0 +1,94 @@
+.keyboard-keys {
+  display: none;
+
+  @include atMedium {
+    display: block;
+    width: 98%;
+    position: absolute;
+    bottom: 15vh;
+    left: 1%;
+    cursor: pointer;
+  }
+
+  @include atLarge {
+    width: 97%;
+    bottom: 15vh;
+    left: 1.5%;
+  }	
+}
+
+.keys {
+  float: left;
+	border-bottom: 1px solid #ccc;
+	height: 5.8rem;
+	width: 1.4rem;
+
+	 @include atSmall {
+		height: 5.8rem;
+		width: 1.4rem;
+	}
+
+	@include atMedium {
+	margin-bottom: -5.5rem;
+	width: 1.91%;
+	height: 8rem;
+	}
+
+	@include atLarge {
+		height: 9.4rem;
+	}
+}
+
+.keys:hover {
+	border: 0;
+	box-shadow: inset 0 0 2px #ccc;	    
+}
+
+.task-text__keys {
+  margin-left: 0;
+}
+
+.one-octave {
+  display: block;
+  position: absolute;
+  margin:0 auto;
+  left: 4.2rem;
+  right: 0;
+  top: 48%;
+  transform: translateY(-25%);
+  width: 18rem;
+  cursor: pointer;
+
+  @include atSmall {
+		left: 5.5rem;
+		right: 0;
+		top: 50%;
+    transform: translateY(-25%);
+  }
+
+  @include atMedium {
+    display: none;
+  }
+}
+
+.one-octave > .keys {
+  width: 2.4rem;
+  height: 9.5rem;
+  // margin-top: 3rem;
+  // margin-bottom: 12rem;
+}
+
+.task-text--one-octave {
+  position: relative;
+  top:  -2.5rem;
+
+  @include atSmall {
+    left: 4.2rem;
+    top: -1.7rem;
+  }
+  
+
+  @include atMedium {
+    display: none;
+  }
+}
