@@ -9,7 +9,7 @@ const GameInfo = () => (
 
 const BackToTheGame = () => (
   <div>
-    <Link className="" to="/">Back to the Game</Link>
+    <Link className="button button__back link" to="/">Back to the Game</Link>
   </div>
 );
 

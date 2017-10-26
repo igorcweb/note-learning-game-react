@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import ModeDisplay from './mode';
+import GameSettings from './gameSettingsReducer';
+import Game from './gameReducer';
 
-const allReducers = combineReducers({
-  ModeDisplay
+export default combineReducers({
+  Game,
+  GameSettings
 });
-
-export default allReducers;

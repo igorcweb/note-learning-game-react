@@ -14,6 +14,8 @@ const easyTreble = () => {
     noteNumber = getRandomInt(0, 4);
   }
   let note = `/images/${notes[noteNumber]}${reg}.jpg`;
+  // tell the state what the answer is... 
+  // dispatch(setAnswer('c', 2))
   return note;
 }
 

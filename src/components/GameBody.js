@@ -2,12 +2,12 @@ import React from 'react';
 import GameButtons from './GameButtons';
 import Keyboard from './Keaboard';
 import GameNotes from './GameNotes';
-import Mode from '../containers/Mode';
+import GameSettingsContainer from '../containers/GameSettingsContainer';
 
 const GameBody = () => (
   <div>
     <GameNotes />
-    <Mode />
+    <GameSettingsContainer />
     <GameButtons />
     <Keyboard />
   </div>

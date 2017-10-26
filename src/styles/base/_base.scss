@@ -21,6 +21,12 @@ h1 {
 	border-radius: 15%;
 	transition: .2s ease-out;
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+	&.was-clicked {
+		background: $bgcolor;
+		box-shadow: none;
+		color: $bgcolor;
+	}
 }
 
 .button:hover {

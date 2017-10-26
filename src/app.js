@@ -3,24 +3,18 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import { createStore } from 'redux';
-import allReducers from './reducers';
-import { modeDisplayBlock, modeDisplayNone } from './actions/display';
+import reducers from './reducers';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
-
-export const store = createStore(allReducers);
-
-const modeDisplay = store.getState().ModeDisplay
-
-console.log('mode state: ', modeDisplay);
-
-//store.dispatch(modeDisplayBlock());
-//store.dispatch(modeDisplayNone());
+const store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppRouter modeDisplay={modeDisplay} />
+    <AppRouter />
   </Provider>, 
   document.getElementById('app'));
 

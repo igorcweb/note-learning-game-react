@@ -1,12 +1,9 @@
-const modeDisplayBlock = () => {
+import { TOGGLE_VISIBILITY } from './';
+
+const toggleVisibility = () => {
   return {
-    type: 'DISPLAY_BLOCK',
-  };
-}
-const modeDisplayNone = () => {
-  return {
-    type: 'DISPLAY_NONE',
+    type: TOGGLE_VISIBILITY
   };
 }
 
-export {modeDisplayBlock, modeDisplayNone}
+export {toggleVisibility}
