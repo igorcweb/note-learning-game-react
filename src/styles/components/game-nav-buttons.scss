@@ -11,12 +11,13 @@
 }
 
 .button__mode {	
+  border: 1px solid steelblue;
   background-color: $bgbutton;
   letter-spacing: 1px;
   font-size: 85%;
-  width: 6.5rem;
+  width: 6.3rem;
   margin-bottom: 1.2rem;
-  height: 1.7rem;
+  height: 1.5rem;
   line-height: 1.7rem;
   padding: 2px;
   position: relative;
@@ -61,18 +62,19 @@
   left: 1rem;
 
   @include atSmall {
-    top: -9.8rem;
+    top: -10.4rem;
     left: 8.2rem;
   }
 
   @include atMedium {
-    top: -13.1rem;
+    top: -13.7rem;
     left: 8.5rem;
   }
 }
 
 
 .button__info, .button__back {
+  border: 1px solid steelblue;
   position: absolute;
   left: 0;
   right: 0;
