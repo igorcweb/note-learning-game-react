@@ -1,4 +1,5 @@
 html {
+	height: 100%;
   font-size: 62.5%;
 }
 
@@ -6,10 +7,12 @@ body {
   font-family : 'Roboto', sans-serif;
   font-size: 1.6rem;
   background-color: $bgcolor;
-  color: $color;
+	color: $color;
+	// background: url("/images/bgpiano2.jpg") no-repeat opacify($color: #8d7050, $amount: .7);
+	// background-size: cover;
 }
 
-h1 {
+h1, h2 {
 	font-weight: normal;
 }
 
@@ -77,18 +80,15 @@ div.warning-message {
 	clear: both;
 	padding:0;
 	position: absolute;
-	top: 97vh;
+	bottom: .7rem;
 	left: 50%;
-	margin-left: -47px;
-	
+	transform: translateX(-50%);
+
 	@include atSmall {
-		top: 96vh;
 		font-size: 70%;
-		margin-left: -5.1rem;
 	}
 
 	@include atMedium {
-		margin-left: -5.4rem;
 		font-size: 75%;
 	}	
 }

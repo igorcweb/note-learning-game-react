@@ -1,0 +1,92 @@
+.info-wrapper {
+	max-width: 92%; 
+	margin: -2.3rem auto; 
+	background-color: #fff;
+	padding-top: 0;
+	color: #555;
+}
+
+.info.header {
+  text-align: right;
+  font-size: 95%;
+
+	@mixin atSmall {
+		font-size: 100%;
+		text-align: center;
+	}
+
+	@mixin atMedium {
+		text-align: center;
+		// font-size: 160%;
+    padding: .5rem 0;
+	}
+}
+
+article {
+	margin: 0 3%;
+	letter-spacing: .5px;
+  font-size: 105%;
+  
+		h1 {
+			font-size: 130%;
+			color: steelblue;
+			padding-top: 1.5em;
+		} 
+
+}
+
+.treble-staff {
+	display: block;
+	width: 48%;
+	min-width: 350px;
+	float: right;
+	margin: -8px 0px 20px 20px;
+
+	@include atSmall {
+		margin-right: 7px;
+		min-width: 400px;
+	}
+}
+
+.bass-staff {
+	display: block;
+	float: right;
+	width: 48%;
+	min-width: 350px;
+	margin: 0 0px 20px 20px;
+
+		@include atSmall {
+		margin-right: 7px;
+		min-width: 400px;
+	}
+
+}
+
+.note-names {
+	display: block;
+	height: 9rem;
+	width: 9rem;
+	margin: 0 auto;
+}
+
+.keyboard-registers {
+	display: block;
+	width: 95%;
+	min-width: 350px;
+	margin: 0 auto;
+}
+
+.staff-registers {
+	display: block;
+	width: 85%;
+	min-width: 350px;
+	margin: 30px auto;
+}
+
+.ledger-treble, .ledger-bass {
+	width: 75%;
+	min-width: 350px;
+	display: block;
+	margin: 0 auto;
+}
+

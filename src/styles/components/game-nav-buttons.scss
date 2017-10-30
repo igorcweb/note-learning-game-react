@@ -71,6 +71,7 @@
   }
 }
 
+
 .button__info, .button__back {
   position: absolute;
   left: 0;
@@ -107,6 +108,10 @@
     left: 3rem;
     top: 1rem;
   }
+}
+
+.button__info.is-showing {
+  display: block;
 }
 
 .button__back {

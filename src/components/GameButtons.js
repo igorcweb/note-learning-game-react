@@ -6,7 +6,7 @@ import KeyboardOneOctave from './KeyboardOneOctave';
 const GameButtons = (props) => {
   let notes;
 
-  if (props.correctAnswer && props.availableNotes.find(note => props.answer.note === note)) {
+  if (props.correctAnswer.note && props.availableNotes.find(note => props.answer.note === note)) {
 
     notes = (
       <li className={`button`}>
@@ -23,13 +23,47 @@ const GameButtons = (props) => {
           className={`button ${wasClicked}`}
           onClick={() => {
             if (props.answer.note === note) {
-              props.setCorrectAnswer('note', note);
+              // inform user answer was correct
+              props.setCorrectAnswer();
+              // reset the form
+              // generate a new question
             } else {
               props.markAnswer('note', note);
             }
           }}
         >
           {note.toUpperCase()}
+        </li>
+      );
+    });
+  }
+
+  let regs;
+
+  if (props.correctAnswer.reg && props.availableRegs.find(reg => props.answer.reg === reg)) {
+
+    regs = (
+      <li className={`button`}>
+        {props.answer.reg}
+      </li>
+    );
+  } else {
+    regs = props.availableRegs.map(reg => {
+      const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';
+
+      return (
+        <li
+          key={reg}
+          className={`button ${wasClicked}`}
+          onClick={() => {
+            if (props.answer.reg === reg) {
+              props.setCorrectAnswer('reg', reg);
+            } else {
+              props.markAnswer('reg', reg);
+            }
+          }}
+        >
+          {reg}
         </li>
       );
     });
@@ -45,13 +79,7 @@ const GameButtons = (props) => {
         <KeyboardOneOctave />
         <h1 className="task-text">Pick a Register:</h1>
         <ul className="register-buttons">
-          <li className="button">1</li>
-          <li className="button">2</li>
-          <li className="button">3</li>
-          <li className="button">4</li>
-          <li className="button">5</li>
-          <li className="button">6</li>
-          <li className="button">7</li>
+          {regs}
         </ul>
         </div> 
     </div>
@@ -63,7 +91,9 @@ const mapStateToProps = ({ Game }) => {
     answer: Game.answer,
     availableNotes: Game.availableNotes,
     answeredNotes: Game.answeredNotes,
-    correctAnswer: Game.correctAnswer
+    correctAnswer: Game.correctAnswer,
+    availableRegs: Game.availableRegs,
+    answeredRegs: Game.answeredRegs
   };
 }
 
@@ -71,7 +101,7 @@ const matchDispatchToProps = (dispatch) => {
   return {
     setCorrectAnswer(type, value) {
       dispatch({
-        type: 'SET_CORRECT_ANSWER'
+        type: SET_CORRECT_ANSWER
       });
     }
   };

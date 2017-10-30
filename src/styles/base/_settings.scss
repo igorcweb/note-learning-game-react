@@ -2,6 +2,7 @@
 
 $bgcolor: #e9ebee;
 
+
 // $bgbutton: #B4BFBF;
 
 $bgbutton: rgba(180, 191, 191, .9);
@@ -35,7 +36,3 @@ $desktop-breakpoint: 45rem;
     @content
   }
 };
-
-.hide {
-  display: none;
-}

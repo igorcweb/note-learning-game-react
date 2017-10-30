@@ -13,7 +13,7 @@ const AppRouter = () => (
         <Route path="/info" component={Info} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Footer />
+      <Footer />      
     </div>
   </BrowserRouter>
 );
