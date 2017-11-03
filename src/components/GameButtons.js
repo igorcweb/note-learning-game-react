@@ -2,6 +2,19 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import KeyboardOneOctave from './KeyboardOneOctave';
+import {
+  setCorrectNote,
+  setCorrectReg,
+  setCorrectAnswer,
+  setQuestion,
+  updateAnsweredNotes,
+  updateAnsweredRegs,
+} from '../actions/correctAnswer';
+import {
+  increaseStreak,
+  resetStreak
+} from '../actions/streak';
+
 
 const GameButtons = (props) => {
   let notes;
@@ -10,7 +23,7 @@ const GameButtons = (props) => {
 
     notes = (
       <li className={`button`}>
-        {props.answer.note.toUpperCase()}
+        {props.answer.note.toUpperCase()} 
       </li>
     );
   } else {
@@ -21,14 +34,19 @@ const GameButtons = (props) => {
         <li
           key={note}
           className={`button ${wasClicked}`}
-          onClick={() => {
+          onClick={(event) => {
             if (props.answer.note === note) {
               // inform user answer was correct
-              props.setCorrectAnswer();
+              // setCorrectNote();
+              console.log(props.setCorrectNote);
+              props.setCorrectNote();
+              
               // reset the form
               // generate a new question
             } else {
-              props.markAnswer('note', note);
+              // props.markAnswer('note', note);
+              // console.log(props.availableNotes);
+              props.updateAnsweredNotes(note);
             }
           }}
         >
@@ -57,9 +75,11 @@ const GameButtons = (props) => {
           className={`button ${wasClicked}`}
           onClick={() => {
             if (props.answer.reg === reg) {
-              props.setCorrectAnswer('reg', reg);
+              props.setCorrectReg();
+              // props.setCorrectAnswer('reg', reg);
             } else {
-              props.markAnswer('reg', reg);
+              // props.markAnswer('reg', reg);
+              props.updateAnsweredRegs(reg);
             }
           }}
         >
@@ -98,14 +118,25 @@ const mapStateToProps = ({ Game }) => {
 }
 
 const matchDispatchToProps = (dispatch) => {
-  return {
-    setCorrectAnswer(type, value) {
-      dispatch({
-        type: SET_CORRECT_ANSWER
-      });
-    }
-  };
+  // return {
+  //   setCorrectAnswer(type, value) {
+  //     dispatch({
+  //       type: SET_CORRECT_ANSWER
+  //     });
+  //   }
+  // };
+
+  return bindActionCreators(
+    {
+      setCorrectNote,
+      setCorrectReg,
+      setCorrectAnswer,
+      increaseStreak,
+      resetStreak,
+      updateAnsweredNotes,
+      updateAnsweredRegs
+    }, dispatch);
 }
 
-export default connect(mapStateToProps)(GameButtons);
+export default connect(mapStateToProps, matchDispatchToProps)(GameButtons);
 

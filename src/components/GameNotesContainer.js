@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const GameNotes = ({ answer }) => {
-  const noteImage = (answer) ? `${answer.note}${answer.reg}`.toUpperCase() : '';
-
+const GameNotes = ({ answer, clef }) => {  
+  let noteImage = (answer) ? `${answer.note}${answer.reg}`.toUpperCase() : '';
+  (clef === 'bass') && (noteImage = `b${noteImage}`);
   return (
     <div>
       <img className="notes" src={`/images/${noteImage}.jpg`} alt="note" />
@@ -11,9 +11,10 @@ const GameNotes = ({ answer }) => {
   );
 }
 
-function mapStateToProps({ Game }) {
+function mapStateToProps({ Game, GameSettings }) {
   return {
-    answer: Game.answer
+    answer: Game.answer,
+    clef: GameSettings.clef
   };
 }
 
