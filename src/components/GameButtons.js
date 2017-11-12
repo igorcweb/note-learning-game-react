@@ -7,6 +7,7 @@ import {
   setCorrectReg,
   setCorrectAnswer,
   setQuestion,
+  resetQuestion,
   updateAnsweredNotes,
   updateAnsweredRegs,
 } from '../actions/correctAnswer';
@@ -14,12 +15,13 @@ import {
   increaseStreak,
   resetStreak
 } from '../actions/streak';
-
+import { resetStore } from '../actions/gameSettings';
+import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 const GameButtons = (props) => {
   let notes;
-
-  if (props.correctAnswer.note && props.availableNotes.find(note => props.answer.note === note)) {
+  let regs;
+  if (props.correctNote && props.availableNotes.find(note => props.answer.note === note)) {
 
     notes = (
       <li className={`button`}>
@@ -29,7 +31,6 @@ const GameButtons = (props) => {
   } else {
     notes = props.availableNotes.map(note => {
       const wasClicked = (props.answeredNotes.indexOf(note) !== -1) ? 'was-clicked' : '';
-
       return (
         <li
           key={note}
@@ -37,18 +38,30 @@ const GameButtons = (props) => {
           onClick={(event) => {
             if (props.answer.note === note) {
               // inform user answer was correct
-              // setCorrectNote();
-              console.log(props.setCorrectNote);
+              // setCorrectNote();  
               props.setCorrectNote();
-              
-              // reset the form
-              // generate a new question
+              if(props.correctReg) {
+                props.setCorrectAnswer();
+                props.increaseStreak();
+                setTimeout(() => {
+                  props.resetStore(); 
+                  if (props.clef === 'treble') {
+                    props.setQuestion(
+                      generateTreble(props.availableNotes, props.difficulty)
+                    );
+                  } else {
+                    props.setQuestion(
+                      generateBass(props.availableNotes, props.difficulty)
+                    );
+                  }
+                }, 2000);
+              }  
             } else {
-              // props.markAnswer('note', note);
-              // console.log(props.availableNotes);
               props.updateAnsweredNotes(note);
+              props.resetStreak();
             }
-          }}
+          }
+        }
         >
           {note.toUpperCase()}
         </li>
@@ -56,10 +69,7 @@ const GameButtons = (props) => {
     });
   }
 
-  let regs;
-
-  if (props.correctAnswer.reg && props.availableRegs.find(reg => props.answer.reg === reg)) {
-
+  if (props.correctReg && props.availableRegs.find(reg => props.answer.reg === reg)) {
     regs = (
       <li className={`button`}>
         {props.answer.reg}
@@ -68,18 +78,36 @@ const GameButtons = (props) => {
   } else {
     regs = props.availableRegs.map(reg => {
       const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';
-
+      const selectedClass = props.correctReg ? 'selected' : '';
       return (
         <li
           key={reg}
-          className={`button ${wasClicked}`}
+          className={`button ${wasClicked} ${selectedClass}`}
           onClick={() => {
             if (props.answer.reg === reg) {
               props.setCorrectReg();
+              if(props.correctNote) {
+                props.setCorrectAnswer();
+                props.increaseStreak();
+                setTimeout(() => {
+                  props.resetStore();
+                  if (props.clef === 'treble') {
+                    props.setQuestion(
+                      generateTreble(props.availableNotes, props.difficulty)
+                    );
+                  } else {
+                    props.setQuestion(
+                      generateBass(props.availableNotes, props.difficulty)
+                    );
+                  }
+                }, 2000);
+              } 
               // props.setCorrectAnswer('reg', reg);
             } else {
               // props.markAnswer('reg', reg);
               props.updateAnsweredRegs(reg);
+              props.resetStreak();
+
             }
           }}
         >
@@ -106,14 +134,18 @@ const GameButtons = (props) => {
   );
 }
 
-const mapStateToProps = ({ Game }) => {
+const mapStateToProps = ({ Game, GameSettings }) => {
   return {
+    correctNote: Game.correctNote,
+    correctReg: Game.correctReg,
     answer: Game.answer,
     availableNotes: Game.availableNotes,
     answeredNotes: Game.answeredNotes,
     correctAnswer: Game.correctAnswer,
     availableRegs: Game.availableRegs,
-    answeredRegs: Game.answeredRegs
+    answeredRegs: Game.answeredRegs,
+    clef: GameSettings.clef,
+    difficulty: GameSettings.difficulty
   };
 }
 
@@ -131,8 +163,11 @@ const matchDispatchToProps = (dispatch) => {
       setCorrectNote,
       setCorrectReg,
       setCorrectAnswer,
+      setQuestion,
       increaseStreak,
+      resetStore,
       resetStreak,
+      resetQuestion,
       updateAnsweredNotes,
       updateAnsweredRegs
     }, dispatch);

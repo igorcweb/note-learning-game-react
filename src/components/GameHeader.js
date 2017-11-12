@@ -5,18 +5,20 @@ import { connect } from 'react-redux';
 import {GameInfo} from './GameNavButtons'
 import { Link } from 'react-router-dom';
 
+const GameHeader = (props) => {
+  return (
+    <header className="header">
+      <h1 className="title">Note Learning Game</h1>
+      <h1 className="streak">Streak: <span id="streak">{props.streak}</span></h1>
+      <GameInfo />
+    </header>
+  );
 
-const GameHeader = () => (
-  <header className="header">
-    <h1 className="title">Note Learning Game</h1>
-    <h1 className="streak">Streak:<span id="streak"> 0</span></h1>
-    <GameInfo />
-  </header>
-);
+}
 
-const mapStateToProps = ({ Game, GameSettings }) => {
+const mapStateToProps = ({ Game }) => {
   return {
-    GameSettings
+    streak: Game.streak
   };
 }
 

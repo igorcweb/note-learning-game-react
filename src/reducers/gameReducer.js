@@ -1,6 +1,7 @@
 import { 
   INCREASE_STREAK,
   RESET_STREAK,
+  RESET_QUESTION,
   SET_CORRECT_NOTE,
   SET_CORRECT_REG,
   SET_CORRECT_ANSWER,
@@ -25,7 +26,16 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case RESET_STORE:
-      state = defaultState;
+      return Object.assign({}, state, {
+        answer: null,
+        answeredNotes: [],
+        answeredRegs: [],
+        availableNotes: ['c', 'd', 'e', 'f', 'g', 'a', 'b'],
+        availableRegs: [1, 2, 3, 4, 5, 6, 7],
+        correctNote: false,
+        correctReg: false,
+        correctAnswer: false,
+      });
     case INCREASE_STREAK:
       return Object.assign({}, state, {
          streak: state.streak + 1 
@@ -70,10 +80,12 @@ export default (state = defaultState, action) => {
       // figure out if it was a note or a reg and update the appropriate array
       return state; // change me
     
-    case 'RESET_QUESTION':
+    case RESET_QUESTION:
       return Object.assign({}, state, {
         answeredNotes: [],
         answeredRegs: [],
+        correctNote: false,
+        correctReg: false,
         correctAnswer: false
       });
     

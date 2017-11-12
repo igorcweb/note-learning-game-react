@@ -1,5 +1,6 @@
 import {
   SET_QUESTION,
+  RESET_QUESTION,
   SET_CORRECT_NOTE,
   SET_CORRECT_REG,
   SET_CORRECT_ANSWER,
@@ -33,6 +34,13 @@ const setQuestion = (payload) => {
   };
 }
 
+const resetQuestion = (payload) => {
+  return {
+    type: RESET_QUESTION,
+    payload
+  }
+}
+
 const updateAnsweredNotes = (payload) => {
   return {
     type: UPDATE_UNSWERED_NOTES,
@@ -51,6 +59,7 @@ export {
   setCorrectNote, 
   setCorrectReg, 
   setCorrectAnswer, 
-  setQuestion, 
+  setQuestion,
+  resetQuestion, 
   updateAnsweredNotes, 
   updateAnsweredRegs }

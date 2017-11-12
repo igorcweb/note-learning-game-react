@@ -6,41 +6,17 @@ import { Link } from 'react-router-dom';
 import { GameInfo } from '../components/GameNavButtons';
 import { toggleVisibility } from '../actions/visibility';
 import { 
-  setTreble, 
-  setBass, 
   setDifficulty,
+  setClef,
   toggleClef,
   resetStore 
 } from '../actions/gameSettings';
 import { setQuestion } from '../actions/correctAnswer';
-import { generateTreble } from '../helpers/gameHelpers';
-import { generateBass } from '../helpers/gameHelpers';
+import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 class GameSettingsContainer extends Component {
   handleToggleButton = () => {
     this.props.toggleVisibility();
-  }
-
-  handleTrebleButton = () => {
-    // this.props.setClef(this.props.Game.clef);
-    this.props.resetStore();
-    console.log(this.props.Game);
-    this.props.setTreble();
-    const { difficulty } = this.props.GameSettings;
-    const { availableNotes } = this.props.Game;
-    this.props.setQuestion(
-      generateTreble(availableNotes, difficulty)
-    );
-  }
-
-  handleBassButton = () => {
-    this.props.resetStore();
-    this.props.setBass();
-    const { difficulty } = this.props.GameSettings;
-    const { availableNotes } = this.props.Game;
-    this.props.setQuestion(
-      generateBass(availableNotes, difficulty)
-    );
   }
 
   setDifficultyHandler = (difficulty) => {
@@ -59,25 +35,43 @@ class GameSettingsContainer extends Component {
     }
   }
 
-  handleBothButton = () => {
+  setClefHandler = (clef) => {
     this.props.resetStore();
-    this.props.toggleClef();
-    const { clef } = this.props.GameSettings;
-    const { availableNotes } = this.props.Game;
     const { difficulty } = this.props.GameSettings;
+    const { availableNotes } = this.props.Game;
+    this.props.setClef(clef);
     if (clef === 'treble') {
       this.props.setQuestion(
         generateTreble(availableNotes, difficulty)
       );
     } else {
+      toggleClef();
       this.props.setQuestion(
         generateBass(availableNotes, difficulty)
       );
     }
   }
 
+
+  // handleBothButton = () => {
+  //   this.props.resetStore();
+  //   this.props.toggleClef();
+  //   const { clef } = this.props.GameSettings;
+  //   const { availableNotes } = this.props.Game;
+  //   const { difficulty } = this.props.GameSettings;
+  //   if (clef === 'treble') {
+  //     this.props.setQuestion(
+  //       generateTreble(availableNotes, difficulty)
+  //     );
+  //   } else {
+  //     this.props.setQuestion(
+  //       generateBass(availableNotes, difficulty)
+  //     );
+  //   }
+  // }
+
   render() {
-    const { isShowing, difficulty } = this.props.GameSettings;
+    const { isShowing, difficulty, clef } = this.props.GameSettings;
     const ToggleButtonData = {
       content: (isShowing) ? <i className="fa fa-times" aria-hidden="true"></i> : <i className="fa fa-bars" aria-hidden="true"></i>,
       className: (isShowing) ? 'cross' : 'hamburger'
@@ -107,13 +101,28 @@ class GameSettingsContainer extends Component {
       }
     ];
 
+    const clefs = [
+      {
+        label: 'Treble',
+        value: 'treble'
+      },
+      {
+        label: 'Bass',
+        value: 'bass',
+      },
+      {
+        label: 'Both',
+        value:  'both'
+      }
+    ];
+
     return (
       <div>
         <div className={gameSettingsContainerClasses}>
           <ul className="level">
             {difficultyLevels.map(diff => {
               const selectedClass = (diff.value === difficulty) ? 'selected' : '';
-
+            
               return (
                 <li
                   key={diff.label}
@@ -126,15 +135,18 @@ class GameSettingsContainer extends Component {
             })}
           </ul>
           <ul className="clef">
-            <li 
-              onClick={this.handleTrebleButton}
-              className="button button__mode button__mode--clef highlight treble">Treble</li>
-            <li 
-              onClick={this.handleBassButton}
-              className="button button__mode button__mode--clef bass">Bass</li>
-            <li 
-              onClick={this.handleBothButton}
-              className="button button__mode button__mode--clef both">Both</li>
+            {clefs.map(selectedClef => {
+              const selectedClass = (selectedClef.value === clef) ? 'selected' : '';
+              return (
+                <li
+                  key={selectedClef.label}
+                  onClick={() => this.setClefHandler(selectedClef.value)}
+                  className={`button button__mode button__mode--clef ${selectedClass}`}
+                >
+                  {selectedClef.label}
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div>
@@ -177,9 +189,9 @@ const matchDispatchToProps = (dispatch) => {
 
   return bindActionCreators({
     toggleVisibility, 
-    setTreble, 
-    setBass, 
     setDifficulty,
+    setClef,
+    toggleClef,
     setQuestion,
     resetStore
   }, dispatch);

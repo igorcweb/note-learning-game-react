@@ -1,7 +1,6 @@
 import { 
   SET_DIFFICULTY,
-  SET_TREBLE,
-  SET_BASS,
+  SET_CLEF,
   TOGGLE_CLEF, 
   RESET_STORE
 } from './';
@@ -19,17 +18,14 @@ const setDifficulty = (difficulty) => {
   }
 }
 
-const setTreble = () => {
+const setClef = (clef) => {
   return {
-    type: SET_TREBLE
+    type: SET_CLEF,
+    payload: clef
   }
 }
 
-const setBass = () => {
-  return {
-    type: SET_BASS
-  }
-}
+
 
 const toggleClef = () => {
   return {
@@ -39,4 +35,4 @@ const toggleClef = () => {
 
 
 
-export { setDifficulty, setTreble, setBass, toggleClef, resetStore }
+export { setDifficulty, setClef, toggleClef, resetStore }
