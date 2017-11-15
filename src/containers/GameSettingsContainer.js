@@ -8,6 +8,7 @@ import { toggleVisibility } from '../actions/visibility';
 import { 
   setDifficulty,
   setClef,
+  setClefSetting,
   toggleClef,
   resetStore 
 } from '../actions/gameSettings';
@@ -35,18 +36,41 @@ class GameSettingsContainer extends Component {
     }
   }
 
-  setClefHandler = (clef) => {
-    this.props.resetStore();
+  setClefHandler = (clefSetting) => {
+    const { props } = this;
+    props.resetStore();
     const { difficulty } = this.props.GameSettings;
     const { availableNotes } = this.props.Game;
-    this.props.setClef(clef);
-    if (clef === 'treble') {
-      this.props.setQuestion(
+
+    props.setClefSetting(clefSetting);
+
+    if (clefSetting === 'both') {
+      switch (props.GameSettings.clef) {
+        case 'treble':
+          props.setClef('bass');
+          props.setQuestion(
+            generateBass(availableNotes, difficulty)
+          );
+          break;
+        case 'bass':
+          props.setClef('treble');
+          props.setQuestion(
+            generateTreble(availableNotes, difficulty)
+          );
+          break;
+      }
+    }
+
+    if (clefSetting === 'treble') {
+      props.setClef(clefSetting);
+      props.setQuestion(
         generateTreble(availableNotes, difficulty)
-      );
-    } else {
-      toggleClef();
-      this.props.setQuestion(
+      ); 
+    }
+    
+    if (clefSetting === 'bass') {
+      props.setClef(clefSetting);
+      props.setQuestion(
         generateBass(availableNotes, difficulty)
       );
     }
@@ -71,7 +95,7 @@ class GameSettingsContainer extends Component {
   // }
 
   render() {
-    const { isShowing, difficulty, clef } = this.props.GameSettings;
+    const { isShowing, difficulty, clef, clefSetting } = this.props.GameSettings;
     const ToggleButtonData = {
       content: (isShowing) ? <i className="fa fa-times" aria-hidden="true"></i> : <i className="fa fa-bars" aria-hidden="true"></i>,
       className: (isShowing) ? 'cross' : 'hamburger'
@@ -136,7 +160,7 @@ class GameSettingsContainer extends Component {
           </ul>
           <ul className="clef">
             {clefs.map(selectedClef => {
-              const selectedClass = (selectedClef.value === clef) ? 'selected' : '';
+              const selectedClass = (selectedClef.value === clefSetting) ? 'selected' : '';
               return (
                 <li
                   key={selectedClef.label}
@@ -173,29 +197,15 @@ const mapStateToProps = ({ Game, GameSettings }) => {
   };
 }
 
-const matchDispatchToProps = (dispatch) => {
-  // return {
-  //   ...bindActionCreators({ resetStore } ,dispatch),
-  //   setClef(currentClef, selectedClef) {
-  //     let nextCelf;
-
-  //     if (selectedClef === 'both') {
-  //       nextCelf = (currentClef === 'treble') ? 'bass' : 'treble';
-  //     }
-
-  //     dispatch(someMethodNameToSetTheClef(nextCelf));
-  //   }
-  // };
-
-  return bindActionCreators({
-    toggleVisibility, 
-    setDifficulty,
-    setClef,
-    toggleClef,
-    setQuestion,
-    resetStore
-  }, dispatch);
-}
+const matchDispatchToProps = (dispatch) => bindActionCreators({
+  toggleVisibility, 
+  setDifficulty,
+  setClef,
+  setClefSetting,
+  toggleClef,
+  setQuestion,
+  resetStore
+}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(GameSettingsContainer);
 

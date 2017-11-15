@@ -120,12 +120,12 @@ const GameButtons = (props) => {
   return (
     <div>
       <div className="button-container">
-        <h1 className="task-text">Pick a Note:</h1>
+        {props.correctNote ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Note:</h1>}
         <ul className="note-buttons">
           {notes}
         </ul>
         <KeyboardOneOctave />
-        <h1 className="task-text">Pick a Register:</h1>
+        {props.correctReg ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Register:</h1>}
         <ul className="register-buttons">
           {regs}
         </ul>
@@ -145,6 +145,7 @@ const mapStateToProps = ({ Game, GameSettings }) => {
     availableRegs: Game.availableRegs,
     answeredRegs: Game.answeredRegs,
     clef: GameSettings.clef,
+    clefSetting: GameSettings.clefSetting,
     difficulty: GameSettings.difficulty
   };
 }

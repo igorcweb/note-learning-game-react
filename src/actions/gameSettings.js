@@ -2,37 +2,39 @@ import {
   SET_DIFFICULTY,
   SET_CLEF,
   TOGGLE_CLEF, 
-  RESET_STORE
+  RESET_STORE,
+  SET_CLEF_SETTING
 } from './';
 
-const resetStore = () => {
+export const resetStore = () => {
   return {
     type: RESET_STORE
   }
 }
 
-const setDifficulty = (difficulty) => {
+export const setDifficulty = (difficulty) => {
   return {
     type: SET_DIFFICULTY,
     payload: difficulty
   }
 }
 
-const setClef = (clef) => {
+export const setClef = (clef) => {
   return {
     type: SET_CLEF,
     payload: clef
   }
 }
 
+export const setClefSetting = (clef) => {
+  return {
+    type: SET_CLEF_SETTING,
+    payload: clef
+  }
+}
 
-
-const toggleClef = () => {
+export const toggleClef = () => {
   return {
     type: TOGGLE_CLEF
   }
 }
-
-
-
-export { setDifficulty, setClef, toggleClef, resetStore }

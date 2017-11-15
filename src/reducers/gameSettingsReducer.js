@@ -2,14 +2,15 @@ import {
         TOGGLE_VISIBILITY, 
         TOGGLE_CLEF, 
         SET_DIFFICULTY,
-        SET_CLEF
+        SET_CLEF,
+        SET_CLEF_SETTING
       } from '../actions';
 
 const defaultState = {
   isShowing: false,
   difficulty: 'easy',
   clef: 'treble',
-  both: 'treble'
+  clefSetting: 'treble'
 };
 
 const GameSettings = (state = defaultState, action) => {
@@ -18,11 +19,13 @@ const GameSettings = (state = defaultState, action) => {
       return Object.assign({}, state, {
         isShowing: !state.isShowing
       });
-
-    case TOGGLE_CLEF:
-      state.clef === 'treble' ? state.clef = 'bass' : state.clef = 'treble'; //take out
+    case SET_CLEF_SETTING:
       return Object.assign({}, state, {
-        clef: action.payload
+        clefSetting: action.payload
+      });
+    case TOGGLE_CLEF:
+      return Object.assign({}, state, {
+        clef: (action.payload === 'treble') ? 'bass' : 'treble'
       });
     case SET_DIFFICULTY:
       return Object.assign({}, state, {
