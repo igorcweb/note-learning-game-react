@@ -63,8 +63,9 @@ class GameSettingsContainer extends Component {
 
     if (clefSetting === 'treble') {
       props.setClef(clefSetting);
+      const newNote = generateTreble(availableNotes, difficulty);
       props.setQuestion(
-        generateTreble(availableNotes, difficulty)
+        newNote
       ); 
     }
     
@@ -75,24 +76,6 @@ class GameSettingsContainer extends Component {
       );
     }
   }
-
-
-  // handleBothButton = () => {
-  //   this.props.resetStore();
-  //   this.props.toggleClef();
-  //   const { clef } = this.props.GameSettings;
-  //   const { availableNotes } = this.props.Game;
-  //   const { difficulty } = this.props.GameSettings;
-  //   if (clef === 'treble') {
-  //     this.props.setQuestion(
-  //       generateTreble(availableNotes, difficulty)
-  //     );
-  //   } else {
-  //     this.props.setQuestion(
-  //       generateBass(availableNotes, difficulty)
-  //     );
-  //   }
-  // }
 
   render() {
     const { isShowing, difficulty, clef, clefSetting } = this.props.GameSettings;

@@ -15,16 +15,18 @@ import {
   increaseStreak,
   resetStreak
 } from '../actions/streak';
-import { resetStore } from '../actions/gameSettings';
+import { resetStore, setClefSetting, setClef } from '../actions/gameSettings';
 import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 const GameButtons = (props) => {
+  console.log(props.correctNote);
+  const selectedClass = props.correctNote ? 'selected' : '';
   let notes;
   let regs;
   if (props.correctNote && props.availableNotes.find(note => props.answer.note === note)) {
 
     notes = (
-      <li className={`button`}>
+      <li className="button">
         {props.answer.note.toUpperCase()} 
       </li>
     );
@@ -34,11 +36,9 @@ const GameButtons = (props) => {
       return (
         <li
           key={note}
-          className={`button ${wasClicked}`}
+          className={`button ${wasClicked} ${selectedClass}`}
           onClick={(event) => {
             if (props.answer.note === note) {
-              // inform user answer was correct
-              // setCorrectNote();  
               props.setCorrectNote();
               if(props.correctReg) {
                 props.setCorrectAnswer();
@@ -68,7 +68,6 @@ const GameButtons = (props) => {
       );
     });
   }
-
   if (props.correctReg && props.availableRegs.find(reg => props.answer.reg === reg)) {
     regs = (
       <li className={`button`}>
@@ -78,7 +77,9 @@ const GameButtons = (props) => {
   } else {
     regs = props.availableRegs.map(reg => {
       const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';
-      const selectedClass = props.correctReg ? 'selected' : '';
+      
+      let selectedClass;
+      
       return (
         <li
           key={reg}
@@ -91,7 +92,22 @@ const GameButtons = (props) => {
                 props.increaseStreak();
                 setTimeout(() => {
                   props.resetStore();
-                  if (props.clef === 'treble') {
+                  if(props.clefSetting === 'both') {
+                    switch (props.clef) {
+                      case 'treble':
+                        props.setClef('bass');
+                        props.setQuestion(
+                          generateBass(props.availableNotes, props.difficulty)
+                        );
+                        break;
+                      case 'bass':
+                        props.setClef('treble');
+                        props.setQuestion(
+                          generateTreble(props.availableNotes, props.difficulty)
+                        );
+                        break;
+                    }
+                  } else if (props.clefSetting === 'treble') {
                     props.setQuestion(
                       generateTreble(props.availableNotes, props.difficulty)
                     );
@@ -102,9 +118,7 @@ const GameButtons = (props) => {
                   }
                 }, 2000);
               } 
-              // props.setCorrectAnswer('reg', reg);
             } else {
-              // props.markAnswer('reg', reg);
               props.updateAnsweredRegs(reg);
               props.resetStreak();
 
@@ -151,16 +165,10 @@ const mapStateToProps = ({ Game, GameSettings }) => {
 }
 
 const matchDispatchToProps = (dispatch) => {
-  // return {
-  //   setCorrectAnswer(type, value) {
-  //     dispatch({
-  //       type: SET_CORRECT_ANSWER
-  //     });
-  //   }
-  // };
 
   return bindActionCreators(
     {
+      setClef,
       setCorrectNote,
       setCorrectReg,
       setCorrectAnswer,

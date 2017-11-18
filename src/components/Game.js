@@ -4,19 +4,25 @@ import { connect } from 'react-redux';
 import GameHeader from './GameHeader';
 import GameBody from './GameBody';
 import { setQuestion } from '../actions/correctAnswer';
-import { generateTreble } from '../helpers/gameHelpers';
+import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 //converting component into container
 
 class HomePage extends Component {
   componentDidMount() {
-    const { difficulty } = this.props.GameSettings;
+    const { difficulty, clef } = this.props.GameSettings;
     const { availableNotes } = this.props.Game;
 
     // generate the note and reg and set it as the current answer
-    this.props.setQuestion(
-      generateTreble(availableNotes, difficulty)
-    );
+    if (clef === 'bass') {
+      this.props.setQuestion(
+        generateBass(availableNotes, difficulty)
+      );
+    } else {
+      this.props.setQuestion(
+        generateTreble(availableNotes, difficulty)
+      );
+    }
   }
 
   render() {
