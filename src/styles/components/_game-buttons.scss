@@ -46,6 +46,7 @@
     &.selected {
     color: #fafafa;
     background-color: steelblue;
+    font-weight: 300;
   }
 
 	@include atSmall {

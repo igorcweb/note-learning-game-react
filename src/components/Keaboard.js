@@ -22,9 +22,7 @@ const Keyboard = (props) => {
   //   {}
   // ]
 
-  console.log(props.wrongKey);
-  //return { props.correctAnswer ? <h1 className="task-text task-text__keys">Correct!</h1> : <h1 className="task-text task-text__keys">or Pick a Key:</h1> };
-
+  
   const keyText = () => {
       if (props.correctAnswer) {
         return <h1 className="task-text task-text__keys">Correct!</h1>;
