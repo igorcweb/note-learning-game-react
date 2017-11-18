@@ -160,7 +160,7 @@ const mapStateToProps = ({ Game, GameSettings }) => {
     answeredRegs: Game.answeredRegs,
     clef: GameSettings.clef,
     clefSetting: GameSettings.clefSetting,
-    difficulty: GameSettings.difficulty
+    difficulty: GameSettings.difficulty,
   };
 }
 
@@ -178,7 +178,7 @@ const matchDispatchToProps = (dispatch) => {
       resetStreak,
       resetQuestion,
       updateAnsweredNotes,
-      updateAnsweredRegs
+      updateAnsweredRegs,
     }, dispatch);
 }
 

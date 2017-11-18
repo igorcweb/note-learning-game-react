@@ -9,6 +9,7 @@ import {
   resetQuestion,
   updateAnsweredNotes,
   updateAnsweredRegs,
+  setWrongKey
 } from '../actions/correctAnswer';
 import {increaseStreak, resetStreak} from '../actions/streak';
 import { resetStore, setClefSetting, setClef } from '../actions/gameSettings';
@@ -20,6 +21,19 @@ const Keyboard = (props) => {
   //   {},
   //   {}
   // ]
+
+  console.log(props.wrongKey);
+  //return { props.correctAnswer ? <h1 className="task-text task-text__keys">Correct!</h1> : <h1 className="task-text task-text__keys">or Pick a Key:</h1> };
+
+  const keyText = () => {
+      if (props.correctAnswer) {
+        return <h1 className="task-text task-text__keys">Correct!</h1>;
+      } else if (props.wrongKey) {
+        return <h1 className="task-text task-text__keys">Try Again!</h1>
+      } else {
+        return <h1 className="task-text task-text__keys">or Pick a Key:</h1>
+      }
+  }
 
   const handleKey = (e) => {
     const answer = props.answer;
@@ -57,11 +71,12 @@ const Keyboard = (props) => {
       }, 2000);
     } else {
       props.resetStreak();
+      props.setWrongKey();
     }
   }
   return (
     <div onClick={handleKey} className="keyboard-keys">
-      {props.correctAnswer ? <h1 className="task-text task-text__keys">Correct!</h1> : <h1 className="task-text task-text__keys">or Pick a Key:</h1>};
+      {keyText()}
       <img className="keys" data-key='a0' src="/images/keys/C.jpg" alt="A0" />
       <img className="keys" data-key='b0' src="/images/keys/E.jpg" alt="B0" />
       <img className="keys" data-key='c1' src="/images/keys/C.jpg" alt="C1" />
@@ -132,7 +147,8 @@ const mapStateToProps = ({ Game, GameSettings }) => {
     answeredRegs: Game.answeredRegs,
     clef: GameSettings.clef,
     clefSetting: GameSettings.clefSetting,
-    difficulty: GameSettings.difficulty
+    difficulty: GameSettings.difficulty,
+    wrongKey: Game.wrongKey
   };
 }
 
@@ -150,7 +166,8 @@ const matchDispatchToProps = (dispatch) => {
       resetStreak,
       resetQuestion,
       updateAnsweredNotes,
-      updateAnsweredRegs
+      updateAnsweredRegs,
+      setWrongKey
     }, dispatch);
 }
 

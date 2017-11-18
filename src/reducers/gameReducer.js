@@ -8,7 +8,8 @@ import {
   SET_QUESTION,
   UPDATE_UNSWERED_NOTES,
   UPDATE_UNSWERED_REGS,
-  RESET_STORE
+  RESET_STORE,
+  SET_WRONG_KEY
 } from '../actions';
 
 const defaultState = {
@@ -20,6 +21,7 @@ const defaultState = {
   correctNote: false,
   correctReg: false,
   correctAnswer: false,
+  wrongKey: false,
   streak: 0
 };
 
@@ -35,6 +37,7 @@ export default (state = defaultState, action) => {
         correctNote: false,
         correctReg: false,
         correctAnswer: false,
+        wrongKey: false
       });
     case INCREASE_STREAK:
       return Object.assign({}, state, {
@@ -87,6 +90,11 @@ export default (state = defaultState, action) => {
         correctNote: false,
         correctReg: false,
         correctAnswer: false
+      });
+    
+    case SET_WRONG_KEY:
+      return Object.assign({}, state, {
+        wrongKey: true
       });
     
       default:

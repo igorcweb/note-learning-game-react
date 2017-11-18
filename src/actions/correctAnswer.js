@@ -5,7 +5,8 @@ import {
   SET_CORRECT_REG,
   SET_CORRECT_ANSWER,
   UPDATE_UNSWERED_NOTES,
-  UPDATE_UNSWERED_REGS
+  UPDATE_UNSWERED_REGS,
+  SET_WRONG_KEY
 } from './';
 
 const setCorrectNote = () => {
@@ -55,6 +56,12 @@ const updateAnsweredRegs = (payload) => {
   }
 }
 
+const setWrongKey = () => {
+  return {
+    type: SET_WRONG_KEY
+  }
+}
+
 export { 
   setCorrectNote, 
   setCorrectReg, 
@@ -62,4 +69,6 @@ export {
   setQuestion,
   resetQuestion, 
   updateAnsweredNotes, 
-  updateAnsweredRegs }
+  updateAnsweredRegs,
+  setWrongKey
+ }
