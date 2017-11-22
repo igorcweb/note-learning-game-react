@@ -46,6 +46,10 @@
 
 .task-text__keys {
   margin-left: 0;
+  &.hide {
+    opacity: 0;
+  }
+
 }
 
 .one-octave {

@@ -23,7 +23,7 @@ const Keyboard = (props) => {
   // ]
 
   
-  const keyText = () => {
+  const keyboardText = () => {
       if (props.correctAnswer) {
         return <h1 className="task-text task-text__keys">Correct!</h1>;
       } else if (props.wrongKey) {
@@ -32,6 +32,8 @@ const Keyboard = (props) => {
         return <h1 className="task-text task-text__keys">or Pick a Key:</h1>
       }
   }
+
+  const blink = () => {}
 
   const handleKey = (e) => {
     const answer = props.answer;
@@ -74,7 +76,7 @@ const Keyboard = (props) => {
   }
   return (
     <div onClick={handleKey} className="keyboard-keys">
-      {keyText()}
+      {keyboardText()}
       <img className="keys" data-key='a0' src="/images/keys/C.jpg" alt="A0" />
       <img className="keys" data-key='b0' src="/images/keys/E.jpg" alt="B0" />
       <img className="keys" data-key='c1' src="/images/keys/C.jpg" alt="C1" />

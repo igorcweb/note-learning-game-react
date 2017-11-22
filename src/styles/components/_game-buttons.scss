@@ -43,10 +43,10 @@
   font-size: 155%;
   margin: 4rem .5rem 5rem .5rem;
 
-    &.selected {
+    &.correct {
     color: #fafafa;
     background-color: steelblue;
-    font-weight: 300;
+    font-weight: normal;
   }
 
 	@include atSmall {

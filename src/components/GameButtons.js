@@ -19,14 +19,13 @@ import { resetStore, setClefSetting, setClef } from '../actions/gameSettings';
 import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 const GameButtons = (props) => {
-  console.log(props.correctNote);
-  const selectedClass = props.correctNote ? 'selected' : '';
+  const correctNoteClass = props.correctNote ? 'correct' : '';
+  const correctRegClass = props.correctReg ? 'correct' : '';
   let notes;
   let regs;
   if (props.correctNote && props.availableNotes.find(note => props.answer.note === note)) {
-
     notes = (
-      <li className="button">
+      <li className={`button ${correctNoteClass}`}>
         {props.answer.note.toUpperCase()} 
       </li>
     );
@@ -36,7 +35,7 @@ const GameButtons = (props) => {
       return (
         <li
           key={note}
-          className={`button ${wasClicked} ${selectedClass}`}
+          className={`button ${wasClicked}`}
           onClick={(event) => {
             if (props.answer.note === note) {
               props.setCorrectNote();
@@ -70,20 +69,17 @@ const GameButtons = (props) => {
   }
   if (props.correctReg && props.availableRegs.find(reg => props.answer.reg === reg)) {
     regs = (
-      <li className={`button`}>
+      <li className={`button ${correctRegClass}`}>
         {props.answer.reg}
       </li>
     );
   } else {
     regs = props.availableRegs.map(reg => {
-      const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';
-      
-      let selectedClass;
-      
+      const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';    
       return (
         <li
           key={reg}
-          className={`button ${wasClicked} ${selectedClass}`}
+          className={`button ${wasClicked} ${correctRegClass}`}
           onClick={() => {
             if (props.answer.reg === reg) {
               props.setCorrectReg();
