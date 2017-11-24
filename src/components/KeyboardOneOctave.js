@@ -68,15 +68,20 @@ const KeyboardOneOctave = (props) => {
   return (
     <div>
       {keyboardText()}
-      <div className="one-octave" onClick={handleKey}>
-        <img className="keys" data-key="c" src="images/keys/C.jpg" alt="c" />
-        <img className="keys" data-key="d" src="images/keys/D.jpg" alt="d" />
-        <img className="keys" data-key="e" src="images/keys/E.jpg" alt="e" />
-        <img className="keys" data-key="f" src="images/keys/C.jpg" alt="f" />
-        <img className="keys" data-key="g" src="images/keys/D.jpg" alt="g" />
-        <img className="keys" data-key="a" src="images/keys/D.jpg" alt="a" />
-        <img className="keys" data-key="b" src="images/keys/E.jpg" alt="b" />
-      </div>
+      <ul className="octave" onClick={handleKey}>
+        <li className="key white c" data-key="c"></li>
+        <li className="key black cs" data-key="cs"></li>
+        <li className="key white d" data-key="d"></li>
+        <li className="key black ds" data-key="ds"></li>
+        <li className="key white e" data-key="e"></li>
+        <li className="key white f" data-key="f"></li>
+        <li className="key black fs" data-key="fs"></li>
+        <li className="key white g" data-key="g"></li>
+        <li className="key black gs" data-key="gs"></li>
+        <li className="key white a" data-key="a"></li>
+        <li className="key black as" data-key="as"></li>
+        <li className="key white b" data-key="b"></li>
+      </ul>
     </div>
   );
 }

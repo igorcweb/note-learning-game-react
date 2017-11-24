@@ -75,7 +75,7 @@ const Keyboard = (props) => {
     }
   }
   return (
-    <div onClick={handleKey} className="keyboard-keys">
+    <ul onClick={handleKey} className="keyboard-keys">
       {keyboardText()}
       <img className="keys" data-key='a0' src="/images/keys/C.jpg" alt="A0" />
       <img className="keys" data-key='b0' src="/images/keys/E.jpg" alt="B0" />
@@ -130,7 +130,7 @@ const Keyboard = (props) => {
       <img className="keys" data-key='b7' src="/images/keys/E.jpg" alt="B7" />
       <img className="keys" data-key='c8' src="images/keys/highC.jpg" alt="C8" />
 
-    </div>
+    </ul>
   );
 }
 
