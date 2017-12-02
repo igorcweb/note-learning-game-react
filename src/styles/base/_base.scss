@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	height: 100%;
   font-size: 62.5%;
@@ -73,23 +77,19 @@ div.warning-message {
 }
 
 .footer {
-	margin:0;
 	display: block;
 	font-size: 65%;
 	font-size: 65%;
 	color: #888;
-	clear: both;
-	padding:0;
-	position: absolute;
-	bottom: .7rem;
-	left: 50%;
-	transform: translateX(-50%);
+	text-align: center;
+	margin-top: 3rem;
 
 	@include atSmall {
 		font-size: 70%;
 	}
 
 	@include atMedium {
+		margin-top: 3rem;
 		font-size: 75%;
 	}	
 }

@@ -1,4 +1,5 @@
 .game-settings {
+  position: absolute;
   display: none;
 
   &.is-showing {
@@ -10,115 +11,109 @@
   }
 }
 
-.button__mode {	
+.button__mode {
+  position: relative;
   border: 1px solid #777;
   background-color: $bgbutton;
   letter-spacing: 1px;
   font-size: 85%;
   width: 6.3rem;
   margin-bottom: 1.2rem;
-  height: 1.5rem;
-  line-height: 1.7rem;
-  padding: 2px;
+  height: 2.1rem;
+  line-height: 2.1rem;
   position: relative;
   z-index: 10;
 
   &.selected {
-    color: #fff;
+    color: #fafafa;
     background-color: steelblue;
   }
 
   @include atSmall {
     width: 6.2rem;
-    height: 1.8rem;
-    line-height: 1.8rem;
+    height: 2rem;
+    line-height: 2rem;
   }
 
   @include atMedium {
     display: block;
     visibility: visible;
-    background-color: $bgbutton;
-    letter-spacing: 1px;
     font-size: 105%;
     width: 8rem;
     height: 2.7rem;
     margin-bottom: 1.5rem;
     line-height: 2.7rem;
-    position: relative;
   }
 }
 
 .button__mode--level {
-  top: -0.5rem;
-  left: 1rem;
+  top: -16rem;
   
   @include atSmall {
-    top: .7rem;
+    top: -18.6rem;
     left: .2rem;
   }
 
   @include atMedium {
-    left: -1.3rem;
+    top: -18rem;
+    left: -1rem;
   }
 }
 
 .button__mode--clef {
-  top: 0;
-  left: 1rem;
+  top: -16rem;
 
   @include atSmall {
-    top: -10.4rem;
+    top: -28.5rem;
     left: 8.2rem;
   }
 
   @include atMedium {
-    top: -13.7rem;
+    top: -30.7rem;
     left: 8.5rem;
   }
 }
 
 
 .button__info, .button__back {
-  border: 1px solid steelblue;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 4.5rem;
-  text-align: center;
   display: none;
+  position: absolute;
+  top: 4.5rem;
+  border: 1px solid #777;
+  text-align: center;
   background-color: rgba(180, 191, 191, .9);
   font-size: 90%;
   width: 7.8rem;
   letter-spacing: 1px;
-  padding: 2px;
   line-height: 1.7rem;
   z-index: 10;
 
   @include atSmall {
+    position: static;
     display: block;
     background: steelblue;
     border: 2px solid rgba(180, 191, 191, .9);
     font-size: 90%;	
     font-weight: 300;		
-    width: 8rem;
-    left: 1.5rem;
-    top: .9rem;
-    padding: 1px 3px;
-		margin:0;
+    width: 9rem;
+    margin-left: 1.2rem;
   }
 
   @include atMedium {
-  	width: 9.4rem;
-    letter-spacing: 2px;
-    padding: 3px;			
-    left: 3rem;
-    top: 1rem;
+    font-size: 100%;
+  	width: 11rem;
+    letter-spacing: 2px;		
+    padding: 3px;
+    margin-top: 2px;
+    margin-left: 0;
   }
 }
 
+
+
 .button__info.is-showing {
   display: block;
+  transition: none;
 }
 
 .button__back {

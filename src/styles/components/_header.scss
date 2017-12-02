@@ -1,6 +1,8 @@
 .header {
-  position: relative;	
-  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 30px;
+  background-color: steelblue;
   color: #fff;
 }
 
@@ -9,10 +11,8 @@
 }
 
 .title {
-  background-color: steelblue;
-  font-weight: 300;
   margin: 0;
-  padding: .7rem .9rem;
+  font-weight: 300;
   font-size: 110%;
   letter-spacing: 1.5px;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -20,7 +20,6 @@
     @include atSmall {
       text-align: center;
 			font-size: 140%;
-			padding: .8rem 0;
     }
 
     @include atMedium {
@@ -29,24 +28,19 @@
 }
 
 .streak, {
-  position: absolute;
-	top: -0.6rem;
-	right: 0.9rem;
+  margin: 0;
 	font-weight: 300;
 	font-size: 110%;
   letter-spacing: 1.5px;
   
   @include atSmall {
-    right: 1.8rem;
     font-size: 140%;
     letter-spacing: 2px;
     font-weight: 300;
-    top: -.7rem;
   }
 
   @include atMedium {
-		right: 3rem;
 		font-size: 170%;
-		top: -1rem;
+		
   }
 }

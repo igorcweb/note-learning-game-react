@@ -16,15 +16,6 @@ import { resetStore, setClefSetting, setClef } from '../actions/gameSettings';
 import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
 const KeyboardOneOctave = (props) => {
-  const keyboardText = () => {
-    if (props.correctNote) {
-      return <h1 className="task-text task-text--one-octave">Correct!</h1>;
-    } else if (props.wrongKey) {
-      return <h1 className="task-text task-text--one-octave">Try Again!</h1>
-    } else {
-      return <h1 className="task-text task-text--one-octave">or a Key:</h1>
-    }
-  }
   const handleKey = (e) => {
     const answer = props.answer;
     if(e.target.dataset.key === answer.note) {
@@ -67,7 +58,6 @@ const KeyboardOneOctave = (props) => {
   }
   return (
     <div>
-      {keyboardText()}
       <ul className="octave" onClick={handleKey}>
         <li className="key white c" data-key="c"></li>
         <li className="key black cs" data-key="cs"></li>

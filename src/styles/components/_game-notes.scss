@@ -1,19 +1,22 @@
+.content {
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+}
+
 .notes {
-	position: absolute;
-	left: 50%;
-	top: 8rem;
-	transform: translateX(-50%);
-	display: block;
+	position: relative;
+	top: 3rem;
 	width: 11rem;
 	height: 13.5rem;
 	border-radius: 5%;
 	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
 	@include atSmall {
-    top: 4rem;
+		position: static;
 		width: 13rem;
 		height: 16rem;
-		top: 6.5rem;
+	
 	}
 
   @include atMedium {

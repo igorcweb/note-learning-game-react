@@ -1,101 +1,81 @@
+// .keyboard-keys {
+//   display: none;
+
+//   @include atMedium {
+//     display: block;
+//     width: 98%;
+//     position: absolute;
+//     bottom: 15vh;
+//     left: 1%;
+//     cursor: pointer;
+//   }
+
+//   @include atLarge {
+//     width: 97%;
+//     bottom: 15vh;
+//     left: 1.5%;
+//   }	
+// }
+
 .keyboard-keys {
   display: none;
 
   @include atMedium {
     display: block;
+    display: flex;
     width: 98%;
-    position: absolute;
-    bottom: 15vh;
-    left: 1%;
-    cursor: pointer;
+    justify-content: center;
   }
-
-  @include atLarge {
-    width: 97%;
-    bottom: 15vh;
-    left: 1.5%;
-  }	
 }
 
-.keys {
-  float: left;
-	border-bottom: 1px solid #ccc;
-	height: 5.8rem;
-	width: 1.4rem;
+// .keys {
+//   float: left;
+// 	border-bottom: 1px solid #ccc;
+// 	height: 5.8rem;
+// 	width: 1.4rem;
 
-	 @include atSmall {
-		height: 5.8rem;
-		width: 1.4rem;
-	}
+// 	 @include atSmall {
+// 		height: 5.8rem;
+// 		width: 1.4rem;
+// 	}
 
-	@include atMedium {
-	margin-bottom: -5.5rem;
-	width: 1.91%;
-	height: 8rem;
-	}
+// 	@include atMedium {
+// 	margin-bottom: -5.5rem;
+// 	width: 1.91%;
+// 	height: 8rem;
+// 	}
 
-	@include atLarge {
-		height: 9.4rem;
-	}
-}
+// 	@include atLarge {
+// 		height: 9.4rem;
+// 	}
+// }
 
-.keys:hover {
-	border: 0;
-	box-shadow: inset 0 0 2px #ccc;	    
-}
+// .keys:hover {
+// 	border: 0;
+// 	box-shadow: inset 0 0 2px #ccc;	    
+// }
 
-.task-text__keys {
-  margin-left: 0;
-  &.hide {
-    opacity: 0;
-  }
 
-}
 
 .octave {
   display: block;
-  position: absolute;
+  display: flex;
   margin: 0 auto;
-  top: 45%;
-  transform: translateY(-25%);
   width: 20rem;
   cursor: pointer;
   z-index: 2;
-
-  @include atSmall {
-		left: 5.5rem;
-		right: 0;
-		top: 50%;
-    transform: translateY(-25%);
-  }
 
   @include atMedium {
     display: none;
   }
 }
 
-// .one-octave > .keys {
-//   width: 2.4rem;
-//   height: 9.5rem;
-  // margin-top: 3rem;
-  // margin-bottom: 12rem;
-// }
-
-// .octave {
-//   height: 165px; 
-//   width: 370px;
-//   margin: 10px auto; 
-//   padding: 20px 0 0 20px;
-//   margin-bottom: 20px;
-// }
-
-
 .key {
   margin: 0; 
   padding: 0; 
   list-style: none;   
   position: relative; 
-  float: left; 
+  // float: left;
   cursor: pointer;
 }
 
@@ -103,12 +83,22 @@
 	height: 120px; 
   width: 30px; 
   z-index: 1;
-	border-left:1px solid #bbb;
-	border-bottom:1px solid #bbb;
-	border-radius:0 0 4px 4px;
-	box-shadow:-1px 0 0 rgba(255,255,255,0.8) inset, 0 0 5px #ccc inset, 0 0 3px rgba(0,0,0,0.2);
-  // background: linear-gradient(to bottom, #eee 0%,#fff 100%);
-  background: #fff;
+	border-left: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+	border-radius: 0 0 4px 4px;
+	box-shadow: -1px 0 0 rgba(255,255,255,0.8) inset, 0 0 5px #ccc inset, 0 0 3px rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom, #fefefe 30%,#fff 100%);
+
+    @include atMedium {
+      height: 90px;
+      width: 24px;
+      border-radius: 0 0 3px 3px;
+    }
+
+    @include atLarge {
+      height: 100px;
+  
+    }
 }
 
 .white:active {
@@ -122,12 +112,24 @@
 .black {
 	height: 70px; 
   width: 20px; 
-  margin: 0 12px 0 -10px; 
+  margin: 0 14px 0 -8px; 
   z-index:2;
 	border:1px solid #000;
 	border-radius:0 0 3px 3px;
-	box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset, 0 -5px 2px 3px rgba(0,0,0,0.6) inset, 0 2px 4px rgba(0,0,0,0.5);
-	background:linear-gradient(45deg, #222 0%,#555 100%);
+	box-shadow:-1px -1px 1px rgba(255,255,255,0.2) inset, 0 -5px 2px 3px rgba(0,0,0,0.6) inset, 0 2px 4px rgba(0,0,0,0.5);
+  background:linear-gradient(45deg, #222 0%,#555 100%);
+
+    @include atMedium {
+      height: 55px;
+      width: 15px;
+      margin: 0 18px 0 -6px;
+    }
+
+    @include atLarge {
+      height: 60px;
+      margin: 0 17px 0 -7px;
+    }
+  
 }
 
 .black:active {
@@ -137,15 +139,41 @@
 
 .c, .d, .e, .g, .a, .b { 
   margin:0 0 0 -24px;  
+  
+    @include atLarge {
+      margin: 0 0 0 -24px;
+    }
+}
+
+@include atMedium {
+  .c {
+    margin: 0;
+  }
+}
+
+
+.task-text__keys {
+  display: none;
+
+  @include atMedium {
+    display: block;
+    margin: 35px 0 10px 0;
+      &.hide {
+      opacity: 0;
+    }
+  }
+
 }
 
 .task-text--one-octave {
+    &.hide {
+    opacity: 0;
+  }
   position: relative;
-  top:  -2.5rem;
+  top: 30px;
 
   @include atSmall {
-    left: 4.2rem;
-    top: -1.7rem;
+    top: 35px;
   }
   
 

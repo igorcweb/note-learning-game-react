@@ -9,7 +9,7 @@ const GameNotes = ({ answer, clef }) => {
   }
 
   return (
-    <div>
+    <div className="content">
       <img className="notes" src={`/images/${noteImage}.jpg`} alt="note" />
     </div>
   );

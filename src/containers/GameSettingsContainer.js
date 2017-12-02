@@ -157,7 +157,6 @@ class GameSettingsContainer extends Component {
           </ul>
         </div>
         <div>
-          <Link className={gameInfoClasses} to="info">Game Info</Link>
         </div>
         <div>
           <button 

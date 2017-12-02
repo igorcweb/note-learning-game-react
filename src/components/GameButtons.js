@@ -10,6 +10,7 @@ import {
   resetQuestion,
   updateAnsweredNotes,
   updateAnsweredRegs,
+  setWrongKey
 } from '../actions/correctAnswer';
 import {
   increaseStreak,
@@ -23,6 +24,24 @@ const GameButtons = (props) => {
   const correctRegClass = props.correctReg ? 'correct' : '';
   let notes;
   let regs;
+  const keyboardText = () => {
+    if (props.correctAnswer) {
+      return <h1 className="task-text task-text__keys">Correct!</h1>;
+    } else if (props.wrongKey) {
+      return <h1 className="task-text task-text__keys">Try Again!</h1>
+    } else {
+      return <h1 className="task-text task-text__keys">or Pick a Key:</h1>
+    }
+  }
+  const keyboardTextOneOctave = () => {
+    if (props.correctNote) {
+      return <h1 className="task-text task-text--one-octave">Correct!</h1>;
+    } else if (props.wrongKey) {
+      return <h1 className="task-text task-text--one-octave">Try Again!</h1>
+    } else {
+      return <h1 className="task-text task-text--one-octave">or a Key:</h1>
+    }
+  }
   if (props.correctNote && props.availableNotes.find(note => props.answer.note === note)) {
     notes = (
       <li className={`button ${correctNoteClass}`}>
@@ -128,18 +147,27 @@ const GameButtons = (props) => {
   }
 
   return (
-    <div>
-      <div className="button-container">
-        {props.correctNote ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Note:</h1>}
-        <ul className="note-buttons">
-          {notes}
-        </ul>
-        <KeyboardOneOctave />
-        {props.correctReg ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Register:</h1>}
-        <ul className="register-buttons">
-          {regs}
-        </ul>
-        </div> 
+    <div className="flex-column">
+      <div className="note-container">
+        <div>
+          {props.correctNote ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Note:</h1>}
+          <ul className="note-buttons">
+            {notes}
+          </ul>
+          {keyboardTextOneOctave()}
+        </div>  
+      </div>  
+      <KeyboardOneOctave />
+
+      <div className="register-container">
+        <div>
+          {props.correctReg ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Register:</h1>}
+          <ul className="register-buttons">
+            {regs}
+          </ul> 
+          {keyboardText()}
+        </div>   
+      </div> 
     </div>
   );
 }
@@ -157,6 +185,7 @@ const mapStateToProps = ({ Game, GameSettings }) => {
     clef: GameSettings.clef,
     clefSetting: GameSettings.clefSetting,
     difficulty: GameSettings.difficulty,
+    wrongKey: Game.wrongKey
   };
 }
 
@@ -175,6 +204,7 @@ const matchDispatchToProps = (dispatch) => {
       resetQuestion,
       updateAnsweredNotes,
       updateAnsweredRegs,
+      setWrongKey
     }, dispatch);
 }
 

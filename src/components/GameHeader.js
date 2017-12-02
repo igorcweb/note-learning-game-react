@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 const GameHeader = (props) => {
   return (
     <header className="header">
-      <h1 className="title">Note-Learning Game</h1>
-      <h1 className="streak">Streak: <span id="streak">{props.streak}</span></h1>
       <GameInfo />
+      <h1 className="title">Note-Learning Game</h1>
+      <h1 className="streak">Streak: <span id="streak">{props.streak}</span></h1> 
     </header>
   );
 
