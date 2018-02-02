@@ -42,6 +42,14 @@
     background-color: steelblue;
     font-weight: normal;
     font-size: 155%;
+
+    @include atSmall {
+      font-size: 240%;
+    }
+    
+    @include atMedium {
+      font-size: 250%;
+    }
   }
 
 	@include atSmall {
