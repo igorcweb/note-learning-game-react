@@ -15,8 +15,6 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter />
-  </Provider>, 
-  document.getElementById('app'));
-
-
-
+  </Provider>,
+  document.getElementById('app')
+);

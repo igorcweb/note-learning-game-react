@@ -37,8 +37,11 @@ h1, h2 {
 	}
 }
 
-.button:hover {
+@include atSmall {
+	.button:hover {
 	transform: scale(1.05);
+}
+
 }
 
 .keys:hover {

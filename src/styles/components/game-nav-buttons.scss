@@ -76,9 +76,11 @@
 
 
 .button__info, .button__back {
-  display: none;
+  display: block;
   position: absolute;
   top: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   border: 1px solid #777;
   text-align: center;
   background-color: rgba(180, 191, 191, .9);
@@ -89,6 +91,7 @@
   z-index: 10;
 
   @include atSmall {
+    transform: none;
     position: static;
     display: block;
     background: steelblue;

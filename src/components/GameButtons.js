@@ -12,14 +12,11 @@ import {
   updateAnsweredRegs,
   setWrongKey
 } from '../actions/correctAnswer';
-import {
-  increaseStreak,
-  resetStreak
-} from '../actions/streak';
+import { increaseStreak, resetStreak } from '../actions/streak';
 import { resetStore, setClefSetting, setClef } from '../actions/gameSettings';
 import { generateTreble, generateBass } from '../helpers/gameHelpers';
 
-const GameButtons = (props) => {
+const GameButtons = props => {
   const correctNoteClass = props.correctNote ? 'correct' : '';
   const correctRegClass = props.correctReg ? 'correct' : '';
   let notes;
@@ -28,41 +25,45 @@ const GameButtons = (props) => {
     if (props.correctAnswer) {
       return <h1 className="task-text task-text__keys">Correct!</h1>;
     } else if (props.wrongKey) {
-      return <h1 className="task-text task-text__keys">Try Again!</h1>
+      return <h1 className="task-text task-text__keys">Try Again!</h1>;
     } else {
-      return <h1 className="task-text task-text__keys">or Pick a Key:</h1>
+      return <h1 className="task-text task-text__keys">or Pick a Key:</h1>;
     }
-  }
+  };
   const keyboardTextOneOctave = () => {
     if (props.correctNote) {
       return <h1 className="task-text task-text--one-octave">Correct!</h1>;
     } else if (props.wrongKey) {
-      return <h1 className="task-text task-text--one-octave">Try Again!</h1>
+      return <h1 className="task-text task-text--one-octave">Try Again!</h1>;
     } else {
-      return <h1 className="task-text task-text--one-octave">or a Key:</h1>
+      return <h1 className="task-text task-text--one-octave">or a Key:</h1>;
     }
-  }
-  if (props.correctNote && props.availableNotes.find(note => props.answer.note === note)) {
+  };
+  if (
+    props.correctNote &&
+    props.availableNotes.find(note => props.answer.note === note)
+  ) {
     notes = (
       <li className={`button ${correctNoteClass}`}>
-        {props.answer.note.toUpperCase()} 
+        {props.answer.note.toUpperCase()}
       </li>
     );
   } else {
     notes = props.availableNotes.map(note => {
-      const wasClicked = (props.answeredNotes.indexOf(note) !== -1) ? 'was-clicked' : '';
+      const wasClicked =
+        props.answeredNotes.indexOf(note) !== -1 ? 'was-clicked' : '';
       return (
         <li
           key={note}
           className={`button ${wasClicked}`}
-          onClick={(event) => {
+          onClick={event => {
             if (props.answer.note === note) {
               props.setCorrectNote();
-              if(props.correctReg) {
+              if (props.correctReg) {
                 props.setCorrectAnswer();
                 props.increaseStreak();
                 setTimeout(() => {
-                  props.resetStore(); 
+                  props.resetStore();
                   if (props.clef === 'treble') {
                     props.setQuestion(
                       generateTreble(props.availableNotes, props.difficulty)
@@ -73,28 +74,27 @@ const GameButtons = (props) => {
                     );
                   }
                 }, 2000);
-              }  
+              }
             } else {
               props.updateAnsweredNotes(note);
               props.resetStreak();
             }
-          }
-        }
+          }}
         >
           {note.toUpperCase()}
         </li>
       );
     });
   }
-  if (props.correctReg && props.availableRegs.find(reg => props.answer.reg === reg)) {
-    regs = (
-      <li className={`button ${correctRegClass}`}>
-        {props.answer.reg}
-      </li>
-    );
+  if (
+    props.correctReg &&
+    props.availableRegs.find(reg => props.answer.reg === reg)
+  ) {
+    regs = <li className={`button ${correctRegClass}`}>{props.answer.reg}</li>;
   } else {
     regs = props.availableRegs.map(reg => {
-      const wasClicked = (props.answeredRegs.indexOf(reg) !== -1) ? 'was-clicked' : '';    
+      const wasClicked =
+        props.answeredRegs.indexOf(reg) !== -1 ? 'was-clicked' : '';
       return (
         <li
           key={reg}
@@ -102,12 +102,12 @@ const GameButtons = (props) => {
           onClick={() => {
             if (props.answer.reg === reg) {
               props.setCorrectReg();
-              if(props.correctNote) {
+              if (props.correctNote) {
                 props.setCorrectAnswer();
                 props.increaseStreak();
                 setTimeout(() => {
                   props.resetStore();
-                  if(props.clefSetting === 'both') {
+                  if (props.clefSetting === 'both') {
                     switch (props.clef) {
                       case 'treble':
                         props.setClef('bass');
@@ -132,11 +132,10 @@ const GameButtons = (props) => {
                     );
                   }
                 }, 2000);
-              } 
+              }
             } else {
               props.updateAnsweredRegs(reg);
               props.resetStreak();
-
             }
           }}
         >
@@ -147,30 +146,34 @@ const GameButtons = (props) => {
   }
 
   return (
-    <div className="flex-column">
+    <div>
       <div className="note-container">
         <div>
-          {props.correctNote ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Note:</h1>}
-          <ul className="note-buttons">
-            {notes}
-          </ul>
+          {props.correctNote ? (
+            <h1 className="task-text">Correct!</h1>
+          ) : (
+            <h1 className="task-text">Pick a Note:</h1>
+          )}
+          <ul className="note-buttons">{notes}</ul>
           {keyboardTextOneOctave()}
-        </div>  
-      </div>  
+        </div>
+      </div>
       <KeyboardOneOctave />
 
       <div className="register-container">
         <div>
-          {props.correctReg ? <h1 className="task-text">Correct!</h1> : <h1 className="task-text">Pick a Register:</h1>}
-          <ul className="register-buttons">
-            {regs}
-          </ul> 
+          {props.correctReg ? (
+            <h1 className="task-text">Correct!</h1>
+          ) : (
+            <h1 className="task-text">Pick a Register:</h1>
+          )}
+          <ul className="register-buttons">{regs}</ul>
           {keyboardText()}
-        </div>   
-      </div> 
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = ({ Game, GameSettings }) => {
   return {
@@ -187,10 +190,9 @@ const mapStateToProps = ({ Game, GameSettings }) => {
     difficulty: GameSettings.difficulty,
     wrongKey: Game.wrongKey
   };
-}
+};
 
-const matchDispatchToProps = (dispatch) => {
-
+const matchDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       setClef,
@@ -205,8 +207,9 @@ const matchDispatchToProps = (dispatch) => {
       updateAnsweredNotes,
       updateAnsweredRegs,
       setWrongKey
-    }, dispatch);
-}
+    },
+    dispatch
+  );
+};
 
 export default connect(mapStateToProps, matchDispatchToProps)(GameButtons);
-
